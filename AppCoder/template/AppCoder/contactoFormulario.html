@@ -1,0 +1,15 @@
+{% extends "appCoder/padre.html" %}
+{% load static %}
+{% block section_name %}
+<h3>Formulario para pacientes</h3>
+<br>
+<form action="{% url 'contactoFormulario' %}" method="POST">{% csrf_token %}
+    <h1>Ingrese los datos del paciente</h1>
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+    <input type="submit" value="Envianos los datos y te contactaremos a la brevedad">
+</form>
+
+{% endblock %}
+
