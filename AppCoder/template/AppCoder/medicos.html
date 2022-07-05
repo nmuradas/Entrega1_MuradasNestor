@@ -2,7 +2,16 @@
 {% load static %}
 
 {% block section_name %}
-<h3>Página de profesionales medicos</h3>
-<br>
-<h3>En breve encontrarás un listado con todos los profesionales</h3>
+<h3>Medicos</h3>
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<h3>Listado de Medicos</h3>
+{% for medico in medicos %}
+<li>{{medico}}</li>
+<button>
+    <a href="{% url 'eliminarMedico' medico.nombre %}">Eliminar</a>
+    <a href="{% url 'editarMedico' medico.nombre %}">Editar</a>
+</button>
+{% endfor %}
 {% endblock %}

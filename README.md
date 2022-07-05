@@ -1,4 +1,6 @@
-# Entrega1_MuradasNestor
+# EntregaFinal_MuradasNestor
+
+REALIZADO SOLO POR NESTOR MURADAS
 
 DJANGO ADMIN:
 User: nmuradas
