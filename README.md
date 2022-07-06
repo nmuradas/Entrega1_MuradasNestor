@@ -1,7 +1,7 @@
 # EntregaFinal_MuradasNestor
 
 REALIZADO SOLO POR NESTOR MURADAS
-NO ME FUE POSIBLE SUBIR EL VIDEO, PESA DEMASIADO AUNQUE SEAN POCOS MINUTOS.
+
 
 
 Siguiendo con la consigna del trabajo final, implementé todo lo visto en clase.
