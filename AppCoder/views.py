@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.models import Medico, Paciente  #traigo la tabla
+from AppCoder.models import Autor, Blog, Invitados  #traigo la tabla
 from django.template import loader  
-from AppCoder.forms import ContactoFormulario, MedicoFormulario,  UserResgistrationForm, UserEditForm
+from AppCoder.forms import ContactoFormulario, AutorFormulario,  UserResgistrationForm, UserEditForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -21,14 +21,8 @@ def aboutMe(self):
     documento = plantilla.render()
     return HttpResponse(documento)
 
-def medicos(request):
-    return render(request, 'appCoder/medicos.html')
-
-def pacientes(request):
-    return render(request, 'appCoder/pacientes.html')
-
-def clinicas(request):
-    return render(request, 'appCoder/clinicas.html')
+def autores(request):
+    return render(request, 'appCoder/autores.html')
 
 
 def contactoFormulario(request):
@@ -39,81 +33,72 @@ def contactoFormulario(request):
         nombre= informacion['nombre']
         apellido= informacion['apellido']
         email= informacion['email']
-        contacto = Paciente(nombre = nombre, apellido = apellido, email = email)
+        contacto = Invitados(nombre = nombre, apellido = apellido, email = email)
         contacto.save()
         return render(request, 'appCoder/inicio.html')
     else:
         miFormulario = ContactoFormulario()
     return render(request, 'appCoder/contactoFormulario.html', {'miFormulario':miFormulario})
 
-def busquedaProfesional(request):
-    return render(request, 'appCoder/busquedaProfesional.html')
-
-def buscar(request):
-    if request.GET['profesion']:
-        profesion = request.GET['profesion']
-        medicos = Medico.objects.filter(profesion=profesion)
-        return render(request, 'appCoder/resultadosBusqueda.html', {'medicos':medicos, 'profesion': profesion})
-    else:
-        respuesta = "No se ha encontrado ningún profesional"
-    return HttpResponse(respuesta)
-
-def leerMedicos(request):
-    medicos = Medico.objects.all()
-    contexto = {'medicos':medicos} 
-    return render(request, 'appCoder/medicos.html', contexto )
+def leerAutores(request):
+    autores = Autor.objects.all()
+    contexto = {'autores':autores} 
+    return render(request, 'appCoder/autores.html', contexto )
 
 @login_required
-def eliminarMedico(request, nombre):
-    medico = Medico.objects.get(nombre=nombre)
-    medico.delete()
-    medicos = Medico.objects.all()
-    contexto = {'medicos':medicos} 
-    return render(request, 'appCoder/medicos.html', contexto)
+def eliminarAutor(request, nombre):
+    autor = Autor.objects.get(nombre=nombre)
+    autor.delete()
+    autores = Autor.objects.all()
+    contexto = {'autores':autores} 
+    return render(request, 'appCoder/autores.html', contexto)
 
 @login_required
-def editarMedico(request, medico_nombre):
-    medico = Medico.objects.get(nombre=medico_nombre) 
+def editarAutor(request, autor_nombre):
+    autor = Autor.objects.get(nombre=autor_nombre) 
     if request.method == 'POST':
-        miFormulario = MedicoFormulario(request.POST)
+        miFormulario = AutorFormulario(request.POST)
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            medico.nombre= informacion['nombre']
-            medico.apellido = informacion['apellido']
-            medico.email = informacion['email']
-            medico.profesion = informacion['profesion']
-            medico.save()
+            autor.nombre= informacion['nombre']
+            autor.apellido = informacion['apellido']
+            autor.email = informacion['email']
+            autor.profesion = informacion['profesion']
+            autor.save()
 
-            medicos = Medico.objects.all()     
-            contexto = {'medicos':medicos}
-            return render(request, 'appCoder/medicos.html', contexto )
+            autores = Autor.objects.all()     
+            contexto = {'autores':autores}
+            return render(request, 'appCoder/autores.html', contexto )
     else:
-        miFormulario = MedicoFormulario(initial={'nombre':medico.nombre, 'apellido':medico.apellido, 'email':medico.email, 'profesion':medico.profesion})
-        contexto = {'miFormulario': miFormulario, 'medico_nombre': medico_nombre}
-        return render(request, 'appCoder/editarMedico.html', contexto )
+        miFormulario = AutorFormulario(initial={'nombre':autor.nombre, 'apellido':autor.apellido, 'email':autor.email, 'profesion':autor.profesion})
+        contexto = {'miFormulario': miFormulario, 'autor_nombre': autor_nombre}
+        return render(request, 'appCoder/editarAutor.html', contexto )
 
-class PacientesList(LoginRequiredMixin, ListView): #lee todos los estudiantes
-    model = Paciente
-    template_name = 'appCoder/paciente_list.html'
 
-class PacienteDetalle(DetailView): #lee uno en particular
-    model = Paciente
-    template_name = 'appCoder/paciente_detalle.html'
+class BlogsList(ListView): 
+    model = Blog
+    template_name = 'appCoder/blog_list.html'
 
-class PacienteCreacion(CreateView): #crea una vista 
-    model = Paciente
-    success_url = reverse_lazy('paciente_listar')
+
+class BlogDetalle(DetailView): 
+    model = Blog
+    template_name = 'appCoder/blog_detalle.html'
+
+
+class BlogCreacion(LoginRequiredMixin, CreateView): 
+    model = Blog
+    success_url = reverse_lazy('blog_listar')
     fields = ['nombre','apellido', 'email']
 
 
-class PacienteEdicion(UpdateView): #actualiza una vista 
-    model = Paciente
-    success_url = reverse_lazy('paciente_listar')
+class BlogEdicion(LoginRequiredMixin, UpdateView): 
+    model = Blog
+    success_url = reverse_lazy('blog_listar')
     fields = ['nombre','apellido', 'email']
 
-class PacienteEliminacion(DeleteView): #elimina el objeto completo una vista 
-    model = Paciente
-    success_url = reverse_lazy('paciente_listar')
+class BlogEliminacion(LoginRequiredMixin, DeleteView): 
+    model = Blog
+    success_url = reverse_lazy('blog_listar')
 
 def login_request(request):
     if request.method == 'POST':

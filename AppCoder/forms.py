@@ -7,7 +7,7 @@ class ContactoFormulario(forms.Form):
     apellido = forms.CharField(max_length=50)
     email = forms.CharField(max_length=50)
 
-class MedicoFormulario(forms.Form):
+class AutorFormulario(forms.Form):
     nombre = forms.CharField(max_length=50)
     apellido = forms.CharField(max_length=50)
     email = forms.EmailField()

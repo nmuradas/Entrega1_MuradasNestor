@@ -1,13 +1,9 @@
 {% extends "appCoder/padre.html" %}
 {% load static %}
 
-{% block section_name %}
-<h3>Medicos</h3>
-{% endblock %}
-
 {% block contenidoQueCambia %}
-<h3>Edición de Medicos</h3>
-<form action="{% url 'editarMedico' medico_nombre %}" method="POST">{% csrf_token %}
+<h3>Edición de Autores</h3>
+<form action="{% url 'editarAutor' autor_nombre %}" method="POST">{% csrf_token %}
     <table>
         {{miFormulario.as_table}}
     </table>

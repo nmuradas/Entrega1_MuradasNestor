@@ -1,0 +1,21 @@
+{% extends "appCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h3>Sección de Blogs</h3>
+{% for blog in object_list %}
+<li>{{blog}}</li>
+<button>
+    <a href="{% url 'blog_detalle' blog.id %}">Ingresar al Post</a>
+</button>
+<button>
+    <a href="{% url 'blog_editar' blog.id %}">Editar</a>
+</button>
+<button>
+    <a href="{% url 'blog_borrar' blog.id %}">Borrar</a>
+</button>
+<button>
+    <a href="{% url 'blog_crear' %}">Crear</a>
+</button>
+{% endfor %}
+{% endblock %}

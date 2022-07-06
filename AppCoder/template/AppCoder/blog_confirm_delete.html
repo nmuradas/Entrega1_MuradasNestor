@@ -1,14 +1,10 @@
 {% extends "appCoder/padre.html" %}
 {% load static %}
 
-{% block section_name %}
-<h3>Pacientes</h3>
-{% endblock %}
-
 {% block contenidoQueCambia %}
-<h3>Sección de Pacientes</h3>
+<h3>Sección de Blogs</h3>
 <form action="" method="POST">{% csrf_token %}
-    Estas seguro de eliminar al Paciente "{{object}} ?"
+    Estas seguro de eliminar el blog "{{object}} ?"
     <input type="submit" value="SI">
 </form>
 {% endblock %}
