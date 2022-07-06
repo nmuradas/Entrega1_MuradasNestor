@@ -11,6 +11,7 @@ Crear autores y modificarlos/eliminarlos. (siendo administrador)
 Crear posteos del Blog(invitados pueden crear posteos sin registrarse) y modificarlos/eliminarlos (siendo administrador).
 Captura error 404 y muestra una web particular
 Permite recibir datos de un formulario, para que se postulen administradores para el Blog.
+Una vez logueado, haciendo click sobre "Hola,'nombre de usuario'", se ingresa a modificar el perfil de usuario.
 
 DJANGO ADMIN:
 User: nestorm
