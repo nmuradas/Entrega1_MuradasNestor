@@ -9,5 +9,8 @@
     <a href="{% url 'eliminarAutor' autor.nombre %}">Eliminar</a>
     <a href="{% url 'editarAutor' autor.nombre %}">Editar</a>
 </button>
+<button>
+    <a href="{% url 'autor_crear' %}">Crear</a>
+</button>
 {% endfor %}
 {% endblock %}

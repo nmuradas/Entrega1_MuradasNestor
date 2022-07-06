@@ -12,6 +12,7 @@ urlpatterns = [
     path("editarAutor/<autor_nombre>", views.editarAutor, name="editarAutor"),
     path("pages/", views.BlogsList.as_view(), name="blog_listar"),
     path("pages/<pk>", views.BlogDetalle.as_view(), name="blog_detalle"),
+    path("autor/nuevo/", views.AutorCreacion.as_view(), name="autor_crear"),
     path("blog/nuevo/", views.BlogCreacion.as_view(), name="blog_crear"),
     path("blog/editar/<pk>", views.BlogEdicion.as_view(), name="blog_editar"),
     path("blog/borrar/<pk>", views.BlogEliminacion.as_view(), name="blog_borrar"),

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from AppCoder.models import Autor, Blog, Invitados  #traigo la tabla
 from django.template import loader  
 from AppCoder.forms import ContactoFormulario, AutorFormulario,  UserResgistrationForm, UserEditForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
@@ -75,6 +75,11 @@ def editarAutor(request, autor_nombre):
         return render(request, 'appCoder/editarAutor.html', contexto )
 
 
+class AutorCreacion(LoginRequiredMixin, CreateView): 
+    model = Autor
+    success_url = reverse_lazy('autores')
+    fields = ['nombre','apellido', 'profesion', 'email']
+
 class BlogsList(ListView): 
     model = Blog
     template_name = 'appCoder/blog_list.html'
@@ -88,13 +93,13 @@ class BlogDetalle(DetailView):
 class BlogCreacion(LoginRequiredMixin, CreateView): 
     model = Blog
     success_url = reverse_lazy('blog_listar')
-    fields = ['titulo','subtitulo', 'cuerpo', 'autor','fecha', 'imagen']
+    fields = ['titulo','subtitulo', 'cuerpo', 'autor','imagen']
 
 
 class BlogEdicion(LoginRequiredMixin, UpdateView): 
     model = Blog
     success_url = reverse_lazy('blog_listar')
-    fields = ['titulo','subtitulo', 'cuerpo', 'autor','fecha', 'imagen']
+    fields = ['titulo','subtitulo', 'cuerpo', 'autor', 'imagen']
 
 class BlogEliminacion(LoginRequiredMixin, DeleteView): 
     model = Blog
@@ -146,3 +151,6 @@ def editarPerfil(request):
     else:
         formulario = UserEditForm(instance=usuario)
     return render(request, 'appCoder/editarPerfil.html', {'usuario':usuario.username, 'formulario':formulario})
+
+class Error404View(TemplateView):
+    template_name= 'appCoder/error_404.html'

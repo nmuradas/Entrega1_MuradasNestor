@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h3>Nunca te olvides, cuan importante es tu aporte! Gracias por ser parte!</h3>
+<h3>Sección de Autores</h3>
 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <h3>Sumar un nuevo autor a la comunidad</h3>
     {{form.as_p}}
     <input type="submit" value="Enviar">
 </form>

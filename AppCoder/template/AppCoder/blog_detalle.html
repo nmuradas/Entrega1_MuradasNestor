@@ -4,12 +4,14 @@
 
 {% block contenidoQueCambia %}
 
-<p>TITULO: {{blog.titulo}}</p>
-<p>SUBTITULO: {{blog.subtitulo}}</p>
 <p>AUTOR: {{blog.autor}}</p>
-<p>CUERPO: {{blog.cuerpo}}</p>
+<p>TITULO: {{blog.titulo}}</p>
+<p>{{blog.subtitulo}}</p>
+<p>{{blog.cuerpo}}</p>
+<img src="{{blog.imagen.url}}" alt="">
+<br>
+<br>
 <p>FECHA DE SUBIDA: {{blog.fecha}}</p>
-{{blog.imagen}}
 <br>
 <br>
 <a href="{% url 'blog_listar' %}">Volver a la Lista de blogs</a>
