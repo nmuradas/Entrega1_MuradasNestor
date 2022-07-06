@@ -3,8 +3,8 @@
 
 {% block contenidoQueCambia %}
 <h3>Listado de Autores</h3>
-{% for medico in medicos %}
-<li>{{medico}}</li>
+{% for autor in autores %}
+<li>{{autor}}</li>
 <button>
     <a href="{% url 'eliminarAutor' autor.nombre %}">Eliminar</a>
     <a href="{% url 'editarAutor' autor.nombre %}">Editar</a>

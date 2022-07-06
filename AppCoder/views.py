@@ -88,13 +88,13 @@ class BlogDetalle(DetailView):
 class BlogCreacion(LoginRequiredMixin, CreateView): 
     model = Blog
     success_url = reverse_lazy('blog_listar')
-    fields = ['nombre','apellido', 'email']
+    fields = ['titulo','subtitulo', 'cuerpo', 'autor','fecha', 'imagen']
 
 
 class BlogEdicion(LoginRequiredMixin, UpdateView): 
     model = Blog
     success_url = reverse_lazy('blog_listar')
-    fields = ['nombre','apellido', 'email']
+    fields = ['titulo','subtitulo', 'cuerpo', 'autor','fecha', 'imagen']
 
 class BlogEliminacion(LoginRequiredMixin, DeleteView): 
     model = Blog
